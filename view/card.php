@@ -20,6 +20,7 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
     $buttontext = 'Antwort speichern und zum Ergebnis';
 }
 ?>
+<div>Hallo <?php echo $_SESSION['name'] ?></div>
 <div class="main">
     <div class="question">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">

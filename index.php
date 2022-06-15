@@ -5,17 +5,19 @@ spl_autoload_register(function ($className) {
     include "class/" . $className . '.php';
 });#
 session_start();
-$action = $_REQUEST['action'] ?? 'showfirst';
+$action = $_REQUEST['action'] ?? 'login';
 //$id = $_REQUEST['id'] ?? null;
 $userinput = $_REQUEST['userinput'] ?? '';
 $frageindex = $_REQUEST['frageindex'] ?? 0;
-
+$loginerror = '';
 
 
 //$learnbox = $_REQUEST['learnbox'] ?? new LearnBox(Flashcard::getall());
-
+//
 //echo '<pre>';
 //print_r($_REQUEST);
+//echo 'session <br>';
+//print_r($_SESSION);
 //echo '</pre>';
 //echo '<pre>';
 //print_r($learnbox->getFlashcards()[0]);
@@ -31,10 +33,27 @@ $frageindex = $_REQUEST['frageindex'] ?? 0;
 //echo '</pre>';
 
 switch ($action) {
-    case ('showfirst'):
-        $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
+    case ('login'):
+        session_unset();
+        $view='login';
+        break;
 
-        $view = 'card';
+    case ('showfirst'):
+        $name = $_REQUEST['name'];
+        $password = $_REQUEST['password'];
+        $user = User::getUserbyName($name);
+        if ($user->checkpw($password)){
+            $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
+            $_SESSION['userid'] = $user->getUserid();
+            $_SESSION['name'] = $user->getName();
+            $view = 'card';
+        } else {
+            $loginerror = 'Login Fehler';
+            $view = 'login';
+        }
+
+
+
         break;
     case ('answer'):
         $view = 'card';
@@ -92,4 +111,8 @@ include 'view/' . $view . '.php';
 //echo '<br>';
 //echo $flah->isUserInputCorrect();
 
-
+echo '<pre>';
+print_r($_REQUEST);
+echo 'session <br>';
+print_r($_SESSION);
+echo '</pre>';
