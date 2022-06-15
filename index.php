@@ -3,14 +3,14 @@
 include 'config.php';
 spl_autoload_register(function ($className) {
     include "class/" . $className . '.php';
-});#
+});
 session_start();
 $action = $_REQUEST['action'] ?? 'login';
 //$id = $_REQUEST['id'] ?? null;
 $userinput = $_REQUEST['userinput'] ?? '';
 $frageindex = $_REQUEST['frageindex'] ?? 0;
 $loginerror = '';
-
+//User::create('Mia','miau');
 
 //$learnbox = $_REQUEST['learnbox'] ?? new LearnBox(Flashcard::getall());
 //
@@ -35,14 +35,13 @@ $loginerror = '';
 switch ($action) {
     case ('login'):
         session_unset();
-        $view='login';
+        $view = 'login';
         break;
-
     case ('showfirst'):
         $name = $_REQUEST['name'];
         $password = $_REQUEST['password'];
         $user = User::getUserbyName($name);
-        if ($user->checkpw($password)){
+        if ($user->checkpw($password)) {
             $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
             $_SESSION['userid'] = $user->getUserid();
             $_SESSION['name'] = $user->getName();
@@ -51,15 +50,12 @@ switch ($action) {
             $loginerror = 'Login Fehler';
             $view = 'login';
         }
-
-
-
         break;
     case ('answer'):
         $view = 'card';
         $learnbox = $_SESSION['learnbox'];
-        $learnbox->getFlashcards()[$frageindex-1]->setUserInput($userinput);
-        $_SESSION['learnbox']= $learnbox;
+        $learnbox->getFlashcards()[$frageindex - 1]->setUserInput($userinput);
+        $_SESSION['learnbox'] = $learnbox;
         if ($frageindex > count($learnbox->getFlashcards()) - 1) {
             $view = 'result';
         }
@@ -71,18 +67,9 @@ switch ($action) {
         $learnbox = $_SESSION['learnbox'];
         $view = 'result';
         break;
-
-
 }
 
 include 'view/' . $view . '.php';
-
-
-
-
-
-
-
 
 
 //

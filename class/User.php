@@ -23,12 +23,7 @@ class User
     }
 
 
-
-
-
-
-
-    public static function getUserbyName($name):User
+    public static function getUserbyName($name): User
     {
         $db = Db::get_Con();
         $sql = 'SELECT * FROM user WHERE name = :name';
@@ -40,16 +35,41 @@ class User
         return $user;
     }
 
-    public function checkpw($password):bool
+    public static function getUserbyId($id): User
     {
-        if ($password === $this->password){
+        $db = Db::get_Con();
+        $sql = 'SELECT * FROM user WHERE userid = :id';
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $id);
+        $stat->execute();
+        $user = $stat->fetchObject(self::class);
+        $stat->closeCursor();
+        return $user;
+    }
+
+    public function checkpw($password): bool
+    {
+        if (password_verify($password, $this->password)) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
 
+    public static function create(string $name, string $password): User
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $db = Db::get_Con();
+        $sql = 'INSERT INTO user (name, password) VALUES (:name, :hash)';
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':name', $name);
+        $stat->bindValue(':hash', $hash);
+        $stat->execute();
+        $id = $db->lastInsertId();
+        $stat->closeCursor();
+        return self::getUserbyId($id);
+    }
 
 
 }
