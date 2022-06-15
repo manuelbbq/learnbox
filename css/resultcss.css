@@ -1,0 +1,75 @@
+body{
+    background-color: lightblue;
+    margin-bottom: 300px;
+}
+
+.richtigeantwort{
+    color: #f36e6e;
+    background-color: #f36e6e;
+    border-style: solid;
+    border-color: #f52626;
+    border-radius: 5px;
+    /*width: 65%;*/
+    /*display: inline-block;*/
+    /*margin-left: 55px;*/
+    /*padding: 5px;*/
+}
+.losung{
+    /*display: inline-block;*/
+    /*width: available;*/
+    padding: 5px;
+    width: 20%;
+    margin: 0px;
+
+}
+.frage, .richtigeantwort{
+    /*display: inline-block;*/
+    /*margin-left: 55px;*/
+    padding: 5px;
+    width: 70%;
+
+}
+
+
+.richtigeantwort:hover{
+    cursor: pointer;
+
+
+}
+.result{
+    margin: 50px;
+    padding: 5px;
+    border: solid black;
+    width: 70%;
+    text-align: left;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+h1{
+    text-align: center;
+    color: royalblue;
+}
+.results{
+    margin-bottom: 200px;
+}
+.right{
+    color: green;
+}
+.wrong{
+    color: red;
+}
+
+.head, .gotomenu{
+    text-align: center;
+}
+.gotoq{
+    background-color: #85bfec;
+    display: inline-block;
+    border-style: none;
+    color: black;
+    text-decoration: none;
+    border-radius: 100%;
+    padding: 2px;
+}

@@ -1,0 +1,96 @@
+body {
+    background-color: lightblue;
+}
+
+.main {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+
+    overflow: hidden;
+}
+
+.showspe {
+    display: inline-block;
+    border-style: none;
+    margin: 5px;
+}
+
+.next, .back, .qcatalog {
+    display: inline-block;
+    border-color: #4485b4;
+}
+
+.pagemenu {
+    background-color: white;
+    border-style: none;
+}
+
+.qcatalogbut, .nextbut:hover, .backbut:hover, .safebut:hover {
+    cursor: pointer;
+}
+
+.backbut, .nextbut, .safebut, .qcatalogbut {
+    background-color: #85bfec;
+    display: inline-block;
+    border-style: none;
+}
+
+.qcatalogbut {
+    border-radius: 100%;
+}
+
+.qcatalog {
+    width: auto;
+    float: right;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: royalblue;
+    padding: 10px;
+}
+
+.qcatalogform {
+    display: inline-block;
+    border-style: none;
+}
+
+
+.question {
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 60%;
+    float: left;
+    padding: 20px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: royalblue;
+
+}
+
+.foot {
+    display: block;
+    border-color: #4485b4;
+}
+
+#useranswer {
+    width: 100%;
+    border-style: solid;
+
+}
+
+#frage, #useranswer, .safebut, .nextbut, .backbut {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border-color: #8098e7;
+    outline-width: 0;
+}
+
+.back {
+    position: absolute;
+    left: 75px;
+}
+
+.next {
+    position: absolute;
+    left: 200px;
+}
