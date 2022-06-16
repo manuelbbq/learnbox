@@ -12,14 +12,16 @@
 <body>
 <div class="login">
     <h1>Login</h1>
-<form class="loginform" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+<form class="loginform" id="loginform" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
     <label id="namelabel" for="name">Name</label>
     <input type="text" id="name" name="name" required><br>
     <label id="passwordlabel" for="password">Passwort</label>
     <input type="password" id="password" name="password" required><br>
-    <button name="action" value="showfirst">Login</button>
-    <div><?php echo $loginerror ?></div>
+    <input type="text" name="action" value="showfirst" hidden>
+
+    <div id="loginerror"></div>
 </form>
+    <button onclick="login()" >Login</button>
 
 <form class="newuser" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
     <label for="name">Name</label>
@@ -71,6 +73,32 @@
         }
 
     }
+
+    function login() {
+
+        let name = document.getElementById('name').value;
+        let pw = document.getElementById('password').value;
+        let str = `&name=${name}&password=${pw}`;
+        console.log(str);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                if(xhttp.response){
+                    document.getElementById('loginform').submit();
+                } else {
+                    document.getElementById('loginerror').innerHTML = 'Fehler';
+
+
+                }
+
+            }
+        }
+        xhttp.open("Post", "ajax/ajaxrequest.php");
+        xhttp.responseType = "json";
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("func=login&"+str);
+    }
+
 
 
 </script>

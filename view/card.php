@@ -11,6 +11,7 @@
 <body>
 
 <?php
+$frageindex = $_SESSION['index'];
 $learnbox = $_SESSION['learnbox'];
 $question = $learnbox->getFlashcards()[$frageindex];
 $leaenser = serialize($learnbox);
