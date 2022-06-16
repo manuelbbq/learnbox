@@ -71,5 +71,35 @@ class User
         return self::getUserbyId($id);
     }
 
+    public function changePassbyId(string $password): void
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $db = Db::get_Con();
+        $sql = 'UPDATE user SET password = :hash WHERE userid = :id';
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':hash', $hash);
+        $stat->bindValue(':id', $this->userid);
+        $stat->execute();
+        $stat->closeCursor();
+    }
+
+    public static function checkIfUserNameExist(string $name): bool
+    {
+        $db = Db::get_Con();
+        $sql = 'SELECT * FROM user WHERE name = :name';
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':name', $name);
+        $stat->execute();
+        if ($stat->fetchColumn()) {
+            $stat->closeCursor();
+            return true;
+        } else {
+            $stat->closeCursor();
+            return false;
+        }
+
+    }
+
+
 
 }

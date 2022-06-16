@@ -1,5 +1,4 @@
 <?php
-
 include 'config.php';
 spl_autoload_register(function ($className) {
     include "class/" . $className . '.php';
@@ -10,8 +9,10 @@ $action = $_REQUEST['action'] ?? 'login';
 $userinput = $_REQUEST['userinput'] ?? '';
 $frageindex = $_REQUEST['frageindex'] ?? 0;
 $loginerror = '';
-//User::create('Mia','miau');
 
+//User::create('Mia','miau');
+//$user = User::getUserbyId(2);
+//$user->changePassbyId('456');
 //$learnbox = $_REQUEST['learnbox'] ?? new LearnBox(Flashcard::getall());
 //
 //echo '<pre>';
@@ -67,6 +68,17 @@ switch ($action) {
         $learnbox = $_SESSION['learnbox'];
         $view = 'result';
         break;
+    case ('retry'):
+        $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
+        $view = 'card';
+        break;
+    case ('newuser'):
+        $view = 'welcome';
+        $name = $_REQUEST['newname'];
+        $pw = $_REQUEST['newpassword'];
+        $user = User::create($name,$pw);
+        $_SESSION['userid'] = $user->getUserid();
+        $_SESSION['name'] = $user->getName();
 }
 
 include 'view/' . $view . '.php';
@@ -77,6 +89,7 @@ include 'view/' . $view . '.php';
 //
 //Flashcard::create('Geht das qmenu','ja');
 ////Flashcard::create('fragew2','2');
+
 ////Flashcard::create('fragew3','3');
 ////Flashcard::create('fragew4','4');
 ////Flashcard::create('fragew5','5');
@@ -98,8 +111,8 @@ include 'view/' . $view . '.php';
 //echo '<br>';
 //echo $flah->isUserInputCorrect();
 
-echo '<pre>';
-print_r($_REQUEST);
-echo 'session <br>';
-print_r($_SESSION);
-echo '</pre>';
+//echo '<pre>';
+//print_r($_REQUEST);
+//echo 'session <br>';
+//print_r($_SESSION);
+//echo '</pre>';

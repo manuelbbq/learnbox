@@ -1,0 +1,50 @@
+body {
+    background-color: lightblue;
+}
+
+button {
+    background-color: #85bfec;
+    display: inline-block;
+    border-style: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    outline-width: 0;
+}
+
+.login {
+    margin: 10%;
+    padding: 20px;
+    border-style: solid;
+    border-color: royalblue;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+
+
+}
+.loginform{
+
+}
+
+.loginform, .newuser {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+input{
+    border-style: solid;
+    outline-width: 0;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border-color: #8098e7;
+}
+/*#namelabel, #name, #passwordlabel, #password, button, #newpassword, #bepassword, #newname {*/
+/*    width: 50%;*/
+/*}*/

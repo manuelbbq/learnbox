@@ -12,6 +12,10 @@
 <div class="head">
     <h1>Das Ergebnis</h1>
     <p class="head"><?php echo $learnbox->getPerzentig() ?>% richtig</p>
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <button name="action" value="retry" >Nochmal ?</button>
+    </form>
+
     <p class="head"><a href="<?php echo $_SERVER['PHP_SELF'] ?>">Nochmal Versuchen</a></p>
     <div class="gotomenu">
         <?php
