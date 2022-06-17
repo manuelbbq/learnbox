@@ -22,12 +22,12 @@ if (isset($_REQUEST['action'])) {
 
 $userinput = $_REQUEST['userinput'] ?? '';
 
-//echo '<pre>';
-//print_r($_REQUEST);
-//echo'<br> action = '.$action.'<br>';
-//echo 'session <br>';
-//print_r($_SESSION);
-//echo '</pre>';
+echo '<pre>';
+print_r($_REQUEST);
+echo'<br> action = '.$action.'<br>';
+echo 'session <br>';
+print_r($_SESSION);
+echo '</pre>';
 
 
 
@@ -68,13 +68,15 @@ switch ($action) {
         $_SESSION['index'] = $_REQUEST['frageindex'] ?? 0;
         $view = 'card';
         break;
-    case ('newuser'):
+    case ('welcome'):
         $view = 'welcome';
-        $name = $_REQUEST['newname'];
-        $pw = $_REQUEST['newpassword'];
-        $user = User::create($name, $pw);
-        $_SESSION['userid'] = $user->getUserid();
-        $_SESSION['name'] = $user->getName();
+        if (isset($_REQUEST['newuser'])) {
+            $name = $_REQUEST['newname'];
+            $pw = $_REQUEST['newpassword'];
+            $user = User::create($name, $pw);
+        } else{
+            $user = User::getUserbyId($_REQUEST['userid']);
+        }
         break;
     case('logout'):
         session_destroy();

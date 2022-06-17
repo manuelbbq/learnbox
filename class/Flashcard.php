@@ -6,6 +6,7 @@ class Flashcard
     protected string $question;
     protected string $answer;
     protected string $user_input;
+    protected string $subject;
 
 
     /**
@@ -77,13 +78,14 @@ class Flashcard
 
 
 
-    public static function create($question, $answer):Flashcard
+    public static function create($question, $answer,$subject):Flashcard
     {
         $db = Db::get_Con();
-        $sql = "INSERT INTO flashcard (question, answer) VALUES (:question, :answer)";
+        $sql = "INSERT INTO flashcard (question, answer, subject) VALUES (:question, :answer, :subject)";
         $stat = $db->prepare($sql);
         $stat->bindValue(':question', $question);
         $stat->bindValue(':answer', $answer);
+        $stat->bindValue(':subject', $subject);
         $stat->execute();
         $id = $db->lastInsertId();
         $stat->closeCursor();
@@ -136,6 +138,17 @@ class Flashcard
         $stat->bindValue(':id',$this->id);
         $stat->execute();
         $stat->closeCursor();
+    }
+
+    public static function getSubjects():array
+    {
+        $db = Db::get_Con();
+        $sql = "SELECT subject FROM flashcard group by subject";
+        $stat = $db->prepare($sql);
+        $stat->execute();
+        $arr = $stat->fetchAll();
+        $stat->closeCursor();
+        return $arr;
     }
 
 

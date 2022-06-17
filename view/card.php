@@ -26,7 +26,7 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
     <div class="question">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <p id="frage">Frage: <?php echo $question->getQuestion() ?></p>
-            <input id="useranswer" type="text" name="userinput" value=""><br>
+            <input id="useranswer" type="text" name="userinput" value="<?php echo $question->getUserinput() ?>"><br>
             <input type="text" name="frageindex" value="<?php echo $frageindex + 1 ?>" hidden>
             <button class="safebut" name="action" value="answer"><?php echo $buttontext ?></button>
 

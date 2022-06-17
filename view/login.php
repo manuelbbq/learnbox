@@ -17,7 +17,8 @@
     <input type="text" id="name" name="name" required><br>
     <label id="passwordlabel" for="password">Passwort</label>
     <input type="password" id="password" name="password" required><br>
-    <input type="text" name="action" value="showfirst" hidden>
+    <input type="text" id="userid" name="userid" value="" hidden><br>
+    <input type="text" name="action" value="welcome" hidden>
 
     <div id="loginerror"></div>
 </form>
@@ -30,7 +31,8 @@
     <input type="password" id="newpassword" name="newpassword" onkeyup="checkpw()" required><br>
     <label for="password">Bestätige Passwort</label>
     <input type="password" id="bepassword" name="bepassword" onkeyup="checkpw()" required><br>
-    <button id="newuserbut" name="action" value="newuser" disabled>Erstellen</button>
+    <input type="text" name="newuser" value="true" hidden>
+    <button id="newuserbut" name="action" value="welcome" disabled>Erstellen</button>
     <div id="newuser"></div>
     <div id="passok"></div>
 </form>
@@ -39,9 +41,12 @@
 <script>
     function checkIfNameExist(str) {
         str = str.value;
+        // document.getElementById('newuser').innerHTML = 'schreibe '+str;
+
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+
                 if(xhttp.response){
                     document.getElementById('newuser').innerHTML = 'Name vergeben';
                     document.getElementById('newuserbut').setAttribute('disabled','');
@@ -83,7 +88,8 @@
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                if(xhttp.response){
+                if(xhttp.response[0]){
+                    document.getElementById('userid').value= xhttp.response[1];
                     document.getElementById('loginform').submit();
                 } else {
                     document.getElementById('loginerror').innerHTML = 'Fehler';
