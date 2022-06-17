@@ -5,7 +5,7 @@ class Flashcard
     protected  int $id;
     protected string $question;
     protected string $answer;
-    protected string $userinput;
+    protected string $user_input;
 
 
     /**
@@ -32,6 +32,15 @@ class Flashcard
         return $this->answer;
     }
 
+    /**
+     * @return string
+     */
+    public function getUserinput(): string
+    {
+        return $this->user_input;
+    }
+
+
 
 
     /**
@@ -48,6 +57,15 @@ class Flashcard
     public function setAnswer(string $answer): void
     {
         $this->answer = $answer;
+    }
+
+    public function isUserInputCorrect():bool
+    {
+        if ($this->answer === $this->user_input){
+            return true;
+        } else{
+            return false;
+        }
     }
 
 

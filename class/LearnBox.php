@@ -9,8 +9,29 @@ class LearnBox
     protected int $date;
 
     /**
+     * @return int
+     */
+    public function getLearnboxId(): int
+    {
+        return $this->learnbox_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+
+
+    /**
      * @return array
      */
+
+
+
     public static function create($user_id, $flasharray): LearnBox
     {
         $db = Db::get_Con();
@@ -71,7 +92,8 @@ class LearnBox
     public function getPerzentig(): float
     {
         $right = 0;
-        foreach ($this->flashcards as $q) {
+        $arr =self::getFlashcards();
+        foreach ($arr as $q) {
             if ($q->getUserInput() === '') {
                 continue;
             }
@@ -79,7 +101,7 @@ class LearnBox
                 $right++;
             }
         }
-        return round($right / count($this->flashcards) * 100, 2);
+        return round($right / count($arr) * 100, 2);
     }
 
 

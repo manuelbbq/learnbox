@@ -37,12 +37,10 @@ switch ($action) {
         break;
     case ('showfirst'):
         $name = $_REQUEST['name'];
-//        $password = $_REQUEST['password'];
         $user = User::getUserbyName($name);
+        $learnbox = LearnBox::create($user->getUserid(),Flashcard::getall());
         $view = 'card';
-        $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
-        $_SESSION['userid'] = $user->getUserid();
-        $_SESSION['name'] = $user->getName();
+        $_SESSION['learnboxid']=$learnbox->getLearnboxId();
         $_SESSION['index'] = 0;
 
         break;
@@ -50,11 +48,10 @@ switch ($action) {
         $view = 'card';
         $frageindex = $_REQUEST['frageindex'] ?? $_SESSION['index'];
         $_SESSION['index'] = $frageindex;
-        $learnbox = $_SESSION['learnbox'];
+        $learnbox = LearnBox::getLearnboxbyId($_SESSION['learnboxid']);
         $frageid = $learnbox->getFlashcards()[$frageindex - 1]->getId();
-        echo $frageid,$_SESSION['userid'],$_REQUEST['userinput'];
-        Userinput::create($frageid,$_SESSION['userid'],$_REQUEST['userinput']);
-        $_SESSION['learnbox'] = $learnbox;
+        $learnbox->setUserInput($_REQUEST['userinput'],$frageid);
+
         if ($frageindex > count($learnbox->getFlashcards()) - 1) {
             $view = 'result';
         }
@@ -64,12 +61,11 @@ switch ($action) {
         $view = 'card';
         break;
     case ('result'):
-        $learnbox = $_SESSION['learnbox'];
+        $learnbox = LearnBox::getLearnboxbyId($_SESSION['learnboxid']);
         $view = 'result';
         break;
     case ('retry'):
         $_SESSION['index'] = $_REQUEST['frageindex'] ?? 0;
-        $_SESSION['learnbox'] = new LearnBox(Flashcard::getall());
         $view = 'card';
         break;
     case ('newuser'):

@@ -49,7 +49,7 @@
 </div>
 <div class="results">
     <?php
-    $learnbox = $_SESSION['learnbox'];
+
 
     foreach ($learnbox->getFlashcards() as $flashcard) {
         if ($flashcard->isUserInputCorrect()) {
