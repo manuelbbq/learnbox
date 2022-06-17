@@ -5,11 +5,11 @@ spl_autoload_register(function ($className) {
 });
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-//$learn = LearnBox::getLearnboxbyId(6);
+$learn = LearnBox::getLearnboxbyId(17);
 //
-//echo '<pre>';
-//print_r($learn->getFlashcards());
-//echo '</pre>';
+echo '<pre>';
+print_r($learn->getSubjects());
+echo '</pre>';
 //
 //echo $learn->getPerzentig();
 

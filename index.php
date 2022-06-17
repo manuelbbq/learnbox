@@ -14,7 +14,7 @@ if (isset($_REQUEST['action'])) {
     $action = $_REQUEST['action'];
 } else {
     if (isset($_SESSION['userid'])) {
-        $action = 'retry';
+        $action = 'welcome';
     } else {
         $action = 'login';
     }
@@ -22,12 +22,12 @@ if (isset($_REQUEST['action'])) {
 
 $userinput = $_REQUEST['userinput'] ?? '';
 
-echo '<pre>';
-print_r($_REQUEST);
-echo'<br> action = '.$action.'<br>';
-echo 'session <br>';
-print_r($_SESSION);
-echo '</pre>';
+//echo '<pre>';
+//print_r($_REQUEST);
+//echo'<br> action = '.$action.'<br>';
+//echo 'session <br>';
+//print_r($_SESSION);
+//echo '</pre>';
 
 
 
@@ -75,15 +75,26 @@ switch ($action) {
             $pw = $_REQUEST['newpassword'];
             $user = User::create($name, $pw);
         } else{
-            $user = User::getUserbyId($_REQUEST['userid']);
+            $userid = $_REQUEST['userid'] ?? $_SESSION['userid'];
+
+            $user = User::getUserbyId($userid);
         }
+        $_SESSION['userid']= $user->getUserid();
         break;
     case('logout'):
         session_destroy();
         $view = 'login';
         break;
+    case('showlearnbox'):
+        $view = 'result';
+        $learnbox = LearnBox::getLearnboxbyId($_REQUEST['learnboxid']);
+        break;
+
 }
-include 'view/menu.php';
+if ($view!=='login'){
+    include 'view/menu.php';
+
+}
 include 'view/' . $view . '.php';
 
 

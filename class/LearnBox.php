@@ -6,7 +6,7 @@ class LearnBox
 
     protected int $learnbox_id;
     protected int $user_id;
-    protected int $date;
+    protected string $createdate;
 
     /**
      * @return int
@@ -24,11 +24,18 @@ class LearnBox
         return $this->user_id;
     }
 
-
-
     /**
-     * @return array
+     * @return int
      */
+    public function getDate(): string
+    {
+        return $this->createdate;
+    }
+
+
+
+
+
 
 
 
@@ -102,6 +109,36 @@ class LearnBox
             }
         }
         return round($right / count($arr) * 100, 2);
+    }
+
+    public static function getLearnBoxesbyUserId($userid):array
+    {
+        $db = Db::get_Con();
+        $sql = 'SELECT * FROM learnboxs WHERE user_id = :id';
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $userid);
+        $stat->execute();
+        $arr = $stat->fetchAll(8,self::class);
+        $stat->closeCursor();
+        return $arr;
+
+    }
+
+    public function getSubjects():array
+    {
+        $db = Db::get_Con();
+        $sql = 'SELECT subject FROM flashcard 
+                LEFT JOIN learnbox_flashcards  on flashcard.id = learnbox_flashcards.flashcard_id
+                LEFT JOIN learnboxs on learnbox_flashcards.learnbox_id = learnboxs.learnbox_id
+                WHERE learnboxs.learnbox_id = :id
+                GROUP BY subject';
+
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $this->learnbox_id);
+        $stat->execute();
+        $arr = $stat->fetchAll();
+        $stat->closeCursor();
+        return $arr;
     }
 
 
