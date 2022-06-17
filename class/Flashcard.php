@@ -5,7 +5,8 @@ class Flashcard
     protected  int $id;
     protected string $question;
     protected string $answer;
-    protected string $userInput = '';
+    protected string $userinput;
+
 
     /**
      * @return int
@@ -31,21 +32,7 @@ class Flashcard
         return $this->answer;
     }
 
-    /**
-     * @return string
-     */
-    public function getUserInput(): string
-    {
-        return $this->userInput;
-    }
 
-    /**
-     * @param string $userInput
-     */
-    public function setUserInput(string $userInput): void
-    {
-        $this->userInput = $userInput;
-    }
 
     /**
      * @param string $question
@@ -131,16 +118,6 @@ class Flashcard
         $stat->bindValue(':id',$this->id);
         $stat->execute();
         $stat->closeCursor();
-    }
-
-    public function isUserInputCorrect():bool
-    {
-        if ($this->answer === $this->userInput)
-        {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 

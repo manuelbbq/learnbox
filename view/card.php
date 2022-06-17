@@ -26,7 +26,7 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
     <div class="question">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <p id="frage">Frage: <?php echo $question->getQuestion() ?></p>
-            <input id="useranswer" type="text" name="userinput" value="<?php echo $question->getUserInput() ?>"><br>
+            <input id="useranswer" type="text" name="userinput" value=""><br>
             <input type="text" name="frageindex" value="<?php echo $frageindex + 1 ?>" hidden>
             <button class="safebut" name="action" value="answer"><?php echo $buttontext ?></button>
 
@@ -35,37 +35,37 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
 
 
     </div>
-    <div class="qcatalog">
-        <?php
-        for ($i = 1; $i <= count($learnbox->getFlashcards()); $i++) {
-
-            if ($learnbox->getFlashcards()[$i - 1]->getUserInput() == '') {
-                $show = $i;
-
-            } else {
-                $show = "<s>$i</s>";
-            }
-
-            if ($i - 1 == $frageindex) {
-                $backcolor = 'royalblue';
-            } else {
-                $backcolor = '';
-            }
-            ?>
-            <form class="qcatalogform" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                <input type="text" name="frageindex" value="<?php echo $i - 1 ?>" hidden>
-                <button class="qcatalogbut" name="action" value="goto"
-                        style="background-color: <?php echo $backcolor ?> "><?php echo $show ?></button>
-            </form>
-            <?php
-            if ($i % 5 === 0) {
-                echo '<br>';
-            }
-        } ?>
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <button class="safebut" name="action" value="result" >Test abgeben</button>
-        </form>
-    </div>
+<!--    <div class="qcatalog">-->
+<!--        --><?php
+//        for ($i = 1; $i <= count($learnbox->getFlashcards()); $i++) {
+//
+//            if ($learnbox->getFlashcards()[$i - 1]->getUserInput() == '') {
+//                $show = $i;
+//
+//            } else {
+//                $show = "<s>$i</s>";
+//            }
+//
+//            if ($i - 1 == $frageindex) {
+//                $backcolor = 'royalblue';
+//            } else {
+//                $backcolor = '';
+//            }
+//            ?>
+<!--            <form class="qcatalogform" action="--><?php //echo $_SERVER['PHP_SELF'] ?><!--" method="post">-->
+<!--                <input type="text" name="frageindex" value="--><?php //echo $i - 1 ?><!--" hidden>-->
+<!--                <button class="qcatalogbut" name="action" value="goto"-->
+<!--                        style="background-color: --><?php //echo $backcolor ?><!-- ">--><?php //echo $show ?><!--</button>-->
+<!--            </form>-->
+<!--            --><?php
+//            if ($i % 5 === 0) {
+//                echo '<br>';
+//            }
+//        } ?>
+<!--        <form action="--><?php //echo $_SERVER['PHP_SELF'] ?><!--" method="post">-->
+<!--            <button class="safebut" name="action" value="result" >Test abgeben</button>-->
+<!--        </form>-->
+<!--    </div>-->
 </div>
 
 

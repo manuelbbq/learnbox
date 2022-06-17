@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 include 'config.php';
 spl_autoload_register(function ($className) {
     include "class/" . $className . '.php';
@@ -46,7 +51,9 @@ switch ($action) {
         $frageindex = $_REQUEST['frageindex'] ?? $_SESSION['index'];
         $_SESSION['index'] = $frageindex;
         $learnbox = $_SESSION['learnbox'];
-        $learnbox->getFlashcards()[$frageindex - 1]->setUserInput($userinput);
+        $frageid = $learnbox->getFlashcards()[$frageindex - 1]->getId();
+        echo $frageid,$_SESSION['userid'],$_REQUEST['userinput'];
+        Userinput::create($frageid,$_SESSION['userid'],$_REQUEST['userinput']);
         $_SESSION['learnbox'] = $learnbox;
         if ($frageindex > count($learnbox->getFlashcards()) - 1) {
             $view = 'result';
@@ -80,7 +87,7 @@ switch ($action) {
 }
 include 'view/menu.php';
 include 'view/' . $view . '.php';
-echo $view;
+
 
 //echo '<pre>';
 //print_r($_REQUEST);
