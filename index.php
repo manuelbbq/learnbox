@@ -36,9 +36,9 @@ switch ($action) {
         $view = 'login';
         break;
     case ('showfirst'):
-        $name = $_REQUEST['name'];
-        $user = User::getUserbyName($name);
-        $learnbox = LearnBox::create($user->getUserid(),Flashcard::getall());
+
+        $user = User::getUserbyId($_SESSION['userid']);
+        $learnbox = LearnBox::create($user->getUserid(),Flashcard::getFlashcardsbySubjects($_REQUEST['subjectarr']));
         $view = 'card';
         $_SESSION['learnboxid']=$learnbox->getLearnboxId();
         $_SESSION['index'] = 0;

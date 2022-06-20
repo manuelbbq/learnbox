@@ -151,6 +151,20 @@ class Flashcard
         return $arr;
     }
 
+    public static function getFlashcardsbySubjects($arr):array
+    {
+        $in  = str_repeat('?,', count($arr) - 1) . '?';
+        $db = Db::get_Con();
+        $sql = "SELECT * FROM flashcard WHERE subject IN ($in)";
+
+        $stat = $db->prepare($sql);
+//        $stat->bindParam(':in', $in);
+        $stat->execute($arr);
+        $arr = $stat->fetchAll(8,self::class);
+        $stat->closeCursor();
+        return $arr;
+    }
+
 
 }
 

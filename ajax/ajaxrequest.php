@@ -23,5 +23,8 @@ switch ($func){
             echo json_encode(false);
         }
         break;
+    default:
+        echo 5;
+
 
 }

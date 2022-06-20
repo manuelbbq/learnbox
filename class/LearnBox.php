@@ -33,12 +33,6 @@ class LearnBox
     }
 
 
-
-
-
-
-
-
     public static function create($user_id, $flasharray): LearnBox
     {
         $db = Db::get_Con();
@@ -83,7 +77,7 @@ class LearnBox
 
     }
 
-    public function setUserInput($userinput,$flashcard_id): void
+    public function setUserInput($userinput, $flashcard_id): void
     {
         $db = Db::get_Con();
         $sql = 'UPDATE learnbox_flashcards SET user_input = :userinput 
@@ -99,7 +93,7 @@ class LearnBox
     public function getPerzentig(): float
     {
         $right = 0;
-        $arr =self::getFlashcards();
+        $arr = self::getFlashcards();
         foreach ($arr as $q) {
             if ($q->getUserInput() === '') {
                 continue;
@@ -111,20 +105,20 @@ class LearnBox
         return round($right / count($arr) * 100, 2);
     }
 
-    public static function getLearnBoxesbyUserId($userid):array
+    public static function getLearnBoxesbyUserId($userid): array
     {
         $db = Db::get_Con();
-        $sql = 'SELECT * FROM learnboxs WHERE user_id = :id';
+        $sql = 'SELECT * FROM learnboxs WHERE user_id = :id ORDER BY createdate DESC ';
         $stat = $db->prepare($sql);
         $stat->bindValue(':id', $userid);
         $stat->execute();
-        $arr = $stat->fetchAll(8,self::class);
+        $arr = $stat->fetchAll(8, self::class);
         $stat->closeCursor();
         return $arr;
 
     }
 
-    public function getSubjects():array
+    public function getSubjects(): array
     {
         $db = Db::get_Con();
         $sql = 'SELECT subject FROM flashcard 
@@ -139,6 +133,21 @@ class LearnBox
         $arr = $stat->fetchAll();
         $stat->closeCursor();
         return $arr;
+    }
+
+    public function countFlashcard(): int
+    {
+        $db = Db::get_Con();
+        $sql = 'SELECT (learnbox_id) 
+                FROM learnbox_flashcards
+                WHERE learnbox_id = :id';
+
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $this->learnbox_id);
+        $stat->execute();
+        $count = $stat->rowCount();
+        $stat->closeCursor();
+        return $count;
     }
 
 
