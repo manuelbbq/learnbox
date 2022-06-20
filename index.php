@@ -104,6 +104,10 @@ switch ($action) {
         $view = 'result';
         $learnbox = LearnBox::getLearnboxbyId($_REQUEST['learnboxid']);
         break;
+    case ('history'):
+        $view = 'history';
+        break;
+
 
 
 }

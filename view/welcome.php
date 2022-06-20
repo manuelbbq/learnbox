@@ -47,9 +47,11 @@
 
     </div>
     <div class="history">
-        <h1>History</h1>
+        <h1>Letzten Tests</h1>
 
-        <?php foreach (LearnBox::getLearnBoxesbyUserId($_SESSION['userid']) as $learnbox) {
+        <?php
+        $i = 1;
+        foreach (LearnBox::getLearnBoxesbyUserId($_SESSION['userid']) as $learnbox) {
             ?>
             <div class="lernbox">
                 <p><?php echo 'Datum: ' . $learnbox->getDate() . ' Prozent: ' . $learnbox->getPerzentig() ?></p>
@@ -65,6 +67,10 @@
 
             </div>
             <?php
+            if ($i === 3){
+                break;
+            } else {
+                $i++;}
         } ?>
     </div>
 
@@ -88,7 +94,7 @@
         if (checkedboxes.length === 0) {
             document.getElementById('errormsg').innerHTML = 'min ein Fach auswählen';
             document.getElementById('start').setAttribute('disabled', '');
-            label.innerHTML = 'keine Fragen Vorhanden';
+            label.innerHTML = 'keine Fragen ';
 
             return;
         }

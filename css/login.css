@@ -23,10 +23,17 @@ button {
     justify-content: center;
     align-items: center;
     width: 70%;
-
-
 }
-.loginform{
+.loginforminput{
+    /*margin: 10%;*/
+    /*padding: 20px;*/
+    height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    width: 70%;
 
 }
 
@@ -45,6 +52,7 @@ input{
     border-radius: 5px;
     border-color: #8098e7;
 }
+
 /*#namelabel, #name, #passwordlabel, #password, button, #newpassword, #bepassword, #newname {*/
 /*    width: 50%;*/
 /*}*/

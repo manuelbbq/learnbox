@@ -1,0 +1,21 @@
+body {
+    background-color: lightblue;
+    padding: 0px;
+}
+
+.lernbox {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: royalblue;
+    margin: 5px;
+    padding: 2px;
+}
+button{
+    background-color: #85bfec;
+    display: inline-block;
+    border-style: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    outline-width: 0;
+}

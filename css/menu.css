@@ -1,0 +1,41 @@
+#menuhead {
+    display: flex;
+    flex-direction: row;
+    background-color: royalblue;
+    height: 30px;
+    align-items: center;
+    align-content: center;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+
+
+
+}
+
+#welcomehead, #logouthead, #historyhead {
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*padding: 20px;*/
+    align-self: center;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    background-color: #85bfec;
+}
+
+#logouthead {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.formmenu, .menubutt {
+    padding: 0px;
+    margin: 0px;
+    background-color: #85bfec;
+    border-style: none;
+    cursor: pointer;
+
+}

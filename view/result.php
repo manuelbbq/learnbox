@@ -13,7 +13,7 @@
     <h1>Das Ergebnis</h1>
     <p class="head"><?php echo $learnbox->getPerzentig() ?>% richtig</p>
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-        <input name="learnboxid" value="<?php echo $_SESSION['learnboxid'] ?>" hidden>
+        <input name="learnboxid" value="<?php echo $_REQUEST['learnboxid'] ?>" hidden>
         <button name="action" value="retry" >Nochmal ?</button>
     </form>
 
