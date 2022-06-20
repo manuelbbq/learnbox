@@ -21,14 +21,21 @@ button {
 .option, .history{
     width: 40%;
     margin: 5%;
+
+
 }
-.lernbox{
+.lernbox, #optionform{
     border-style: solid;
     border-radius: 5px;
     border-color: royalblue;
     margin: 5px;
     padding: 2px;
 }
+#optionform{
+    padding: 5px;
+    margin: 5%;
+}
+
 p{
     margin: 5px;
 }

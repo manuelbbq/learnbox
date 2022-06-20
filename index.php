@@ -38,7 +38,18 @@ switch ($action) {
     case ('showfirst'):
 
         $user = User::getUserbyId($_SESSION['userid']);
-        $learnbox = LearnBox::create($user->getUserid(),Flashcard::getFlashcardsbySubjects($_REQUEST['subjectarr']));
+
+        $allqs = Flashcard::getFlashcardsbySubjects($_REQUEST['subjectarr']);
+        $keys = array_rand($allqs,$_REQUEST['quantity']);
+        $question = array();
+        foreach ($keys as $key){
+            $question[] = $allqs[$key];
+        }
+        shuffle($question);
+
+
+
+        $learnbox = LearnBox::create($user->getUserid(),$question);
         $view = 'card';
         $_SESSION['learnboxid']=$learnbox->getLearnboxId();
         $_SESSION['index'] = 0;
@@ -65,7 +76,11 @@ switch ($action) {
         $view = 'result';
         break;
     case ('retry'):
-        $_SESSION['index'] = $_REQUEST['frageindex'] ?? 0;
+        $user = User::getUserbyId($_SESSION['userid']);
+        $oldlearnbox = LearnBox::getLearnboxbyId($_REQUEST['learnboxid']);
+        $learnbox = LearnBox::create($user->getUserid(),$oldlearnbox->getFlashcards());
+        $_SESSION['learnboxid']=$learnbox->getLearnboxId();
+        $_SESSION['index'] = 0;
         $view = 'card';
         break;
     case ('welcome'):
@@ -89,6 +104,7 @@ switch ($action) {
         $view = 'result';
         $learnbox = LearnBox::getLearnboxbyId($_REQUEST['learnboxid']);
         break;
+
 
 }
 if ($view!=='login'){

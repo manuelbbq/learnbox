@@ -21,9 +21,10 @@
 
 <div class="sectiona">
     <div class="option">
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <h1>Erstelle Zettelbox</h1>
+        <form id="optionform"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <div class="subjects">
-                <p>Fächer</p>
+                <div>Fächer</div>
                 <?php
                 $i = 0;
                 foreach (Flashcard::getSubjects() as $subject) {
@@ -59,6 +60,7 @@
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
                     <button name="action" value="showlearnbox">Anzeigen</button>
+                    <button name="action" value="retry">Nochmal</button>
                 </form>
 
             </div>
