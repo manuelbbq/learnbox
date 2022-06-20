@@ -46,9 +46,6 @@ switch ($action) {
             $question[] = $allqs[$key];
         }
         shuffle($question);
-
-
-
         $learnbox = LearnBox::create($user->getUserid(),$question);
         $view = 'card';
         $_SESSION['learnboxid']=$learnbox->getLearnboxId();
@@ -62,7 +59,6 @@ switch ($action) {
         $learnbox = LearnBox::getLearnboxbyId($_SESSION['learnboxid']);
         $frageid = $learnbox->getFlashcards()[$frageindex - 1]->getId();
         $learnbox->setUserInput($_REQUEST['userinput'],$frageid);
-
         if ($frageindex > count($learnbox->getFlashcards()) - 1) {
             $view = 'result';
         }
@@ -102,6 +98,8 @@ switch ($action) {
         break;
     case('showlearnbox'):
         $view = 'result';
+        $_SESSION['learnboxid'] = $_REQUEST['learnboxid'];
+
         $learnbox = LearnBox::getLearnboxbyId($_REQUEST['learnboxid']);
         break;
     case ('history'):

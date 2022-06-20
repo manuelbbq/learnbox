@@ -13,7 +13,7 @@
     <h1>Das Ergebnis</h1>
     <p class="head"><?php echo $learnbox->getPerzentig() ?>% richtig</p>
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-        <input name="learnboxid" value="<?php echo $_REQUEST['learnboxid'] ?>" hidden>
+        <input name="learnboxid" value="<?php echo $_SESSION['learnboxid'] ?>" hidden>
         <button name="action" value="retry" >Nochmal ?</button>
     </form>
 
@@ -49,6 +49,7 @@
 </div>
 <div class="results">
     <?php
+    $i=1;
 
 
     foreach ($learnbox->getFlashcards() as $flashcard) {
@@ -65,9 +66,9 @@
         }
 //    $isUserInput= '§§§§';
         ?>
-        <div i class="result" style="background-color: <?php echo $backgroundColor ?> "
-             id="result<?php echo $flashcard->getId() ?>">
-            <p class="losung"> Frage:</p>
+        <a class="anchor" id="result<?php echo $flashcard->getId() ?>"></a>
+        <div i class="result" style="background-color: <?php echo $backgroundColor ?> ">
+            <p class="losung"><?php echo $i ?> Frage:</p>
             <span class="frage"> <?php echo $flashcard->getQuestion() ?></span>
             <br>
             <span class="losung"><span
@@ -84,6 +85,7 @@
         </div>
 
         <?php
+        $i++;
     }
 
 
@@ -93,7 +95,7 @@
 
 
     function showanswer(ele) {
-        ele.style.backgroundColor = ele.parentElement.parentElement.style.backgroundColor;
+        // ele.style.backgroundColor = ele.parentElement.parentElement.style.backgroundColor;
         ele.style.color = 'black';
     }
 </script>
