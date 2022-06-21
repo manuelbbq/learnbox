@@ -26,6 +26,7 @@
                 <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
                 <button name="action" value="showlearnbox">Anzeigen</button>
                 <button name="action" value="retry">Nochmal</button>
+                <button name="action" value="delete">Löschen</button>
             </form>
 
         </div>

@@ -150,5 +150,18 @@ class LearnBox
         return $count;
     }
 
+    public static function deletebyId($id):void
+    {
+        LearnFlash::deletebyId($id);
+        $db = Db::get_Con();
+        $sql = 'DELETE FROM learnboxs 
+                WHERE learnbox_id = :id';
+
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $id);
+        $stat->execute();
+        $stat->closeCursor();
+    }
+
 
 }

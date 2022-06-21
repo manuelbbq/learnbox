@@ -19,6 +19,17 @@ class LearnFlash
         $stat->closeCursor();
     }
 
+    public static function deletebyId($id):void
+    {
+        $db = Db::get_Con();
+        $sql = "DELETE FROM learnbox_flashcards 
+                WHERE learnbox_id = :id";
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':id', $id);
+        $stat->execute();
+        $stat->closeCursor();
+    }
+
 
 
 

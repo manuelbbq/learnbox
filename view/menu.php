@@ -3,7 +3,6 @@
 
 
     <div id="welcomehead">
-
         <form class="formmenu" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <button class="menubutt" name="action" value="welcome">Hauptmenu</button>
         </form>

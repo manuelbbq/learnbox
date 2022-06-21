@@ -16,19 +16,21 @@ $learnbox =LearnBox::getLearnboxbyId( $_SESSION['learnboxid']);
 $question = $learnbox->getFlashcards()[$frageindex];
 //$leaenser = serialize($learnbox);
 if ($frageindex + 1 != count($learnbox->getFlashcards())) {
-    $buttontext = 'Antwort speichern';
+    $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
 } else {
-    $buttontext = 'Antwort speichern und zum Ergebnis';
+    $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
+    $button.= '<button class="safebut" name="action" value="result">Test Abgeben</button>';
 }
 ?>
-<div>Hallo <?php echo User::getUserbyId($learnbox->getUserId())->getName() ?></div>
+<!--<div>Hallo --><?php //echo User::getUserbyId($learnbox->getUserId())->getName() ?><!--</div>-->
 <div class="main">
     <div class="question">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <p id="frage">Frage: <?php echo $question->getQuestion() ?></p>
             <input id="useranswer" type="text" name="userinput" value="<?php echo $question->getUserinput() ?>"><br>
             <input type="text" name="frageindex" value="<?php echo $frageindex + 1 ?>" hidden>
-            <button class="safebut" name="action" value="answer"><?php echo $buttontext ?></button>
+            <button class="safebut" name="action" value="answer">Antwort speichern</button>
+
 
 
         </form>

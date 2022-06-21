@@ -60,7 +60,8 @@ switch ($action) {
         $frageid = $learnbox->getFlashcards()[$frageindex - 1]->getId();
         $learnbox->setUserInput($_REQUEST['userinput'],$frageid);
         if ($frageindex > count($learnbox->getFlashcards()) - 1) {
-            $view = 'result';
+            $_SESSION['index']--;
+//            $view = 'result';
         }
         break;
     case ('goto'):
@@ -105,9 +106,11 @@ switch ($action) {
     case ('history'):
         $view = 'history';
         break;
-
-
-
+    case('delete'):
+        $view = 'history';
+        $id = $_REQUEST['learnboxid'];
+        LearnBox::deletebyId($id);
+        break;
 }
 if ($view!=='login'){
     include 'view/menu.php';
