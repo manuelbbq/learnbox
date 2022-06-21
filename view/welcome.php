@@ -106,7 +106,7 @@
                 document.getElementById('errormsg').innerHTML = '';
             }
         }
-        xhttp.open("Post", "ajax/ajaxminmax.php");
+        xhttp.open("Post", "ajax/requestmax.php");
         xhttp.responseType = "json";
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(checkedboxes));

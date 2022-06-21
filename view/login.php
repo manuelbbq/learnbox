@@ -67,7 +67,7 @@
 
             }
         }
-        xhttp.open("Post", "ajax/ajaxrequest.php");
+        xhttp.open("Post", "ajax/checkusername.php");
         xhttp.responseType = "json";
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("func=checkIfUserNameExist&name=" + str);
@@ -114,7 +114,7 @@
 
             }
         }
-        xhttp.open("Post", "ajax/ajaxrequest.php");
+        xhttp.open("Post", "ajax/loginrequest.php");
         xhttp.responseType = "json";
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("func=login&" + str);
