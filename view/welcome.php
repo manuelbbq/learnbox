@@ -37,7 +37,6 @@
                     $i++;
                 } ?>
             </div>
-
             <label id="quantitylabel" for="quantity">max. Anzahl :</label>
             <input type="number" id="quantity" name="quantity" min="1" max="5" required>
             <input type="text" name="name" value="<?php echo $user->getName() ?>" hidden><br>
@@ -48,7 +47,6 @@
     </div>
     <div class="history">
         <h1>Letzten Tests</h1>
-
         <?php
         $i = 1;
         foreach (LearnBox::getLearnBoxesbyUserId($_SESSION['userid']) as $learnbox) {
@@ -90,29 +88,20 @@
                 checkedboxes.push(checkbox.value)
             }
         }
-
         if (checkedboxes.length === 0) {
             document.getElementById('errormsg').innerHTML = 'min ein Fach auswählen';
             document.getElementById('start').setAttribute('disabled', '');
             label.innerHTML = 'keine Fragen ';
-
             return;
         }
-
-
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                 console.log(xhttp.response)
-
                 label.innerHTML = 'max Anzahl ' + xhttp.response;
                 quantity.setAttribute('max', xhttp.response);
                 document.getElementById('start').removeAttribute('disabled');
-
-
                 document.getElementById('errormsg').innerHTML = '';
-
-
             }
         }
         xhttp.open("Post", "ajax/ajaxminmax.php");
