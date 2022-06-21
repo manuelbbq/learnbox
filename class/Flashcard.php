@@ -2,7 +2,7 @@
 
 class Flashcard
 {
-    protected  int $id;
+    protected int $id;
     protected string $question;
     protected string $answer;
     protected string $user_input;
@@ -42,8 +42,6 @@ class Flashcard
     }
 
 
-
-
     /**
      * @param string $question
      */
@@ -60,25 +58,17 @@ class Flashcard
         $this->answer = $answer;
     }
 
-    public function isUserInputCorrect():bool
+    public function isUserInputCorrect(): bool
     {
-        if ($this->answer === $this->user_input){
+        if ($this->answer === $this->user_input) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
 
-
-
-
-
-
-
-
-
-    public static function create($question, $answer,$subject):Flashcard
+    public static function create($question, $answer, $subject): Flashcard
     {
         $db = Db::get_Con();
         $sql = "INSERT INTO flashcard (question, answer, subject) VALUES (:question, :answer, :subject)";
@@ -92,18 +82,18 @@ class Flashcard
         return self::getbyID($id);
     }
 
-    public static function getall():array
+    public static function getall(): array
     {
         $db = Db::get_Con();
         $sql = "SELECT * FROM flashcard";
         $stat = $db->prepare($sql);
         $stat->execute();
-        $arr = $stat->fetchAll(8,self::class);
+        $arr = $stat->fetchAll(8, self::class);
         $stat->closeCursor();
         return $arr;
     }
 
-    public static function getbyID(int $id):Flashcard
+    public static function getbyID(int $id): Flashcard
     {
         $db = Db::get_Con();
         $sql = "SELECT * FROM flashcard
@@ -111,36 +101,36 @@ class Flashcard
         $stat = $db->prepare($sql);
         $stat->bindValue(':id', $id);
         $stat->execute();
-        $person = $stat->fetchObject( self::class);
+        $person = $stat->fetchObject(self::class);
         $stat->closeCursor();
         return $person;
 
     }
 
-    public function update():void
+    public function update(): void
     {
         $db = Db::get_Con();
         $sql = "UPDATE flashcard SET question = :question , answer = :answer
                 WHERE id=:id";
         $stat = $db->prepare($sql);
-        $stat->bindValue(':question',$this->question);
-        $stat->bindValue(':answer',$this->answer);
-        $stat->bindValue(':id',$this->id);
+        $stat->bindValue(':question', $this->question);
+        $stat->bindValue(':answer', $this->answer);
+        $stat->bindValue(':id', $this->id);
         $stat->execute();
         $stat->closeCursor();
     }
 
-    public function delete():void
+    public function delete(): void
     {
         $db = Db::get_Con();
         $sql = "DELETE FROM flashcard WHERE id = :id";
         $stat = $db->prepare($sql);
-        $stat->bindValue(':id',$this->id);
+        $stat->bindValue(':id', $this->id);
         $stat->execute();
         $stat->closeCursor();
     }
 
-    public static function getSubjects():array
+    public static function getSubjects(): array
     {
         $db = Db::get_Con();
         $sql = "SELECT subject FROM flashcard group by subject";
@@ -151,22 +141,42 @@ class Flashcard
         return $arr;
     }
 
-    public static function getFlashcardsbySubjects($arr):array
+    public static function getFlashcardsbySubjects($arr): array
     {
-        $in  = str_repeat('?,', count($arr) - 1) . '?';
+        $in = str_repeat('?,', count($arr) - 1) . '?';
         $db = Db::get_Con();
         $sql = "SELECT * FROM flashcard WHERE subject IN ($in)";
 
         $stat = $db->prepare($sql);
 //        $stat->bindParam(':in', $in);
         $stat->execute($arr);
-        $arr = $stat->fetchAll(8,self::class);
+        $arr = $stat->fetchAll(8, self::class);
         $stat->closeCursor();
         return $arr;
     }
 
+    public function isanswer(int $learnbox_id):bool
+    {
+        $db = Db::get_Con();
+        $sql = "SELECT user_input FROM learnbox_flashcards
+                WHERE learnbox_id = :learnbox_id
+                AND flashcard_id = :flashcard_id";
+        $stat = $db->prepare($sql);
+        $stat->bindValue(':learnbox_id', $learnbox_id);
+        $stat->bindValue(':flashcard_id', $this->id);
+        $stat->execute();
+        $answer = $stat->fetch();
+        $stat->closeCursor();
+        if ($answer['user_input'] == '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
+
 
 
 

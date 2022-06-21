@@ -43,3 +43,10 @@ p{
 h1{
     margin: 3px;
 }
+.subjects{
+    display: flex;
+    flex-wrap: wrap;
+}
+.checkbox, .label{
+    width: 20%;
+}

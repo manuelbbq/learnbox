@@ -41,12 +41,13 @@ body {
 }
 
 .qcatalog {
-    width: auto;
-    float: right;
+    width: 25%;
+    /*float: right;*/
     border-style: solid;
     border-radius: 20px;
     border-color: royalblue;
     padding: 10px;
+    margin-top: 50px ;
 }
 
 .qcatalogform {
@@ -57,7 +58,8 @@ body {
 
 .question {
     margin-top: 50px;
-    margin-left: 20px;
+
+    margin-right: 20px;
     width: 60%;
     float: left;
     padding: 20px;
@@ -68,7 +70,7 @@ body {
 }
 
 .foot {
-    display: block;
+    /*display: block;*/
     border-color: #4485b4;
 }
 
@@ -89,12 +91,21 @@ body {
     outline-width: 0;
 }
 
-.back {
-    position: absolute;
-    left: 75px;
-}
+/*.back {*/
+/*    position: absolute;*/
+/*    left: 75px;*/
+/*}*/
 
-.next {
-    position: absolute;
-    left: 200px;
+/*.next {*/
+/*    position: absolute;*/
+/*    left: 200px;*/
+/*}*/
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+.leftbut, .rightbut{
+    margin-top: 20px;
+    width: 50%;
 }

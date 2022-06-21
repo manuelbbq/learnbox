@@ -130,7 +130,7 @@ class LearnBox
         $stat = $db->prepare($sql);
         $stat->bindValue(':id', $this->learnbox_id);
         $stat->execute();
-        $arr = $stat->fetchAll();
+        $arr = $stat->fetchAll(PDO::FETCH_COLUMN,0);
         $stat->closeCursor();
         return $arr;
     }

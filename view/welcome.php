@@ -22,17 +22,20 @@
 <div class="sectiona">
     <div class="option">
         <h1>Erstelle Zettelbox</h1>
-        <form id="optionform"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <form id="optionform" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+            <div>Fächer</div>
             <div class="subjects">
-                <div>Fächer</div>
+
                 <?php
-                $i = 0;
+                $i = 1;
                 foreach (Flashcard::getSubjects() as $subject) {
                     ?>
-                    <label for="<?php echo $subject['subject'] ?>"><?php echo $subject['subject'] ?></label>
-                    <input type="checkbox" class="checkbox" id="<?php echo $subject['subject'] ?>" name="subjectarr[]"
+                    <label class="label" for="<?php echo $subject['subject'] ?>"><?php echo $subject['subject'] ?></label>
+                    <input  type="checkbox" class="checkbox" id="<?php echo $subject['subject'] ?>" name="subjectarr[]"
                            value="<?php echo $subject['subject'] ?>" onchange="getmaxquestions()" checked>
-                    <br>
+                    <?php if ($i % 2 == 0) {
+                        echo "<br>";
+                    } ?>
                     <?php
                     $i++;
                 } ?>
@@ -42,7 +45,7 @@
             <input type="text" name="name" value="<?php echo $user->getName() ?>" hidden><br>
             <button id="start" name="action" value="showfirst">Start</button>
         </form>
-        <p id="errormsg">hier</p>
+        <p id="errormsg"></p>
 
     </div>
     <div class="history">
@@ -53,9 +56,7 @@
             ?>
             <div class="lernbox">
                 <p><?php echo 'Datum: ' . $learnbox->getDate() . ' Prozent: ' . $learnbox->getPerzentig() ?></p>
-                <p>Fächer: <?php foreach ($learnbox->getSubjects() as $subject) {
-                        echo $subject['subject'] . ' ';
-                    } ?></p>
+                <p>Fächer: <?php echo implode(', ',$learnbox->getSubjects())?></p>
                 <p>Fragen: <?php echo $learnbox->countFlashcard() ?></p>
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
@@ -65,10 +66,11 @@
 
             </div>
             <?php
-            if ($i === 3){
+            if ($i === 3) {
                 break;
             } else {
-                $i++;}
+                $i++;
+            }
         } ?>
     </div>
 

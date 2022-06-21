@@ -18,9 +18,7 @@
         ?>
         <div class="lernbox">
             <p><?php echo 'Datum: ' . $learnbox->getDate() . ' Prozent: ' . $learnbox->getPerzentig() ?></p>
-            <p>Fächer: <?php foreach ($learnbox->getSubjects() as $subject) {
-                    echo $subject['subject'] . ' ';
-                } ?></p>
+            <p>Fächer: <?php echo implode(', ',$learnbox->getSubjects()) ?></p>
             <p>Fragen: <?php echo $learnbox->countFlashcard() ?></p>
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>

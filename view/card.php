@@ -9,21 +9,21 @@
     <title>Learnbox</title>
 </head>
 <body>
-
-<?php
-$frageindex = $_SESSION['index'];
-$learnbox =LearnBox::getLearnboxbyId( $_SESSION['learnboxid']);
-$question = $learnbox->getFlashcards()[$frageindex];
-//$leaenser = serialize($learnbox);
-if ($frageindex + 1 != count($learnbox->getFlashcards())) {
-    $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
-} else {
-    $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
-    $button.= '<button class="safebut" name="action" value="result">Test Abgeben</button>';
-}
-?>
-<!--<div>Hallo --><?php //echo User::getUserbyId($learnbox->getUserId())->getName() ?><!--</div>-->
-<div class="main">
+<div class="container">
+    <?php
+    $frageindex = $_SESSION['index'];
+    $learnbox = LearnBox::getLearnboxbyId($_SESSION['learnboxid']);
+    $question = $learnbox->getFlashcards()[$frageindex];
+    //$leaenser = serialize($learnbox);
+    if ($frageindex + 1 != count($learnbox->getFlashcards())) {
+        $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
+    } else {
+        $button = '<button class="safebut" name="action" value="answer">Antwort speichern</button>';
+        $button .= '<button class="safebut" name="action" value="result">Test Abgeben</button>';
+    }
+    ?>
+    <!--<div>Hallo --><?php //echo User::getUserbyId($learnbox->getUserId())->getName() ?><!--</div>-->
+    <!--<div class="main">-->
     <div class="question">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
             <p id="frage">Frage: <?php echo $question->getQuestion() ?></p>
@@ -32,16 +32,17 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
             <button class="safebut" name="action" value="answer">Antwort speichern</button>
 
 
-
         </form>
 
 
     </div>
+
+
     <div class="qcatalog">
         <?php
         for ($i = 1; $i <= count($learnbox->getFlashcards()); $i++) {
 
-            if ($learnbox->getFlashcards()[$i - 1]->getUserInput() == '') {
+            if ($learnbox->getFlashcards()[$i - 1]->isanswer($learnbox->getLearnboxId())) {
                 $show = $i;
 
             } else {
@@ -62,38 +63,61 @@ if ($frageindex + 1 != count($learnbox->getFlashcards())) {
             <?php
             if ($i % 5 === 0) {
                 echo '<br>';
+
             }
-        } ?>
+        }
+        foreach ($learnbox->getFlashcards() as $flash) {
+            if ($flash->isanswer($learnbox->getLearnboxId())) {
+
+                $checked =  '<span> Nicht alles Beantwortet </span>';
+                break;
+            } else {
+                $checked = '<span> Alles Ok </span>';
+
+            }
+        }
+
+        ?>
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <button class="safebut" name="action" value="result" >Test abgeben</button>
+            <button class="safebut" name="action" value="result">Test abgeben</button>
+            <?php echo $checked ?>
         </form>
+    </div>
+
+
+    <div class="leftbut">
+
+        <?php
+
+
+
+        if ($frageindex != 0) { ?>
+            <form class="back" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <input type="text" name="frageindex" value="<?php echo $frageindex - 1 ?>" hidden>
+                <button class="backbut" name="action" value="goto">vorherige Frage</button>
+
+            </form>
+            <?php
+        }
+
+        ?>
+    </div>
+    <div class="rightbut">
+
+        <?php
+
+
+        if ($frageindex + 1 != count($learnbox->getFlashcards())) {
+            ?>
+            <form class="next" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                <input type="text" name="frageindex" value="<?php echo $frageindex + 1 ?>" hidden>
+                <button class="nextbut" name="action" value="goto">nächste Frage</button>
+            </form>
+        <?php }
+        ?>
     </div>
 </div>
 
-
-<div class="foot">
-
-    <?php
-    if ($frageindex != 0) { ?>
-        <form class="back" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <input type="text" name="frageindex" value="<?php echo $frageindex - 1 ?>" hidden>
-            <button class="backbut" name="action" value="goto">vorherige Frage</button>
-        </form>
-        <?php
-    }
-
-
-    if ($frageindex + 1 != count($learnbox->getFlashcards())) {
-        ?>
-        <form class="next" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <input type="text" name="frageindex" value="<?php echo $frageindex + 1 ?>" hidden>
-            <button class="nextbut" name="action" value="goto">nächste Frage</button>
-        </form>
-    <?php }
-    ?>
-</div>
-
-<br>
 
 </body>
 <script>
