@@ -1,0 +1,33 @@
+body {
+    background-color: lightblue;
+    padding: 0px;
+}
+
+button {
+    background-color: #85bfec;
+    display: inline-block;
+    border-style: none;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    outline-width: 0;
+}
+
+#card{
+    margin-top: 20%;
+    margin-right: 20%;
+
+    border-style: solid;
+    border-color: royalblue;
+    border-radius: 5px;
+    padding: 10px;
+}
+#card:hover{
+    cursor: pointer;
+}
+#frage, #antwort{
+
+}
+#antwort{
+    opacity:0
+}

@@ -111,6 +111,9 @@ switch ($action) {
         $id = $_REQUEST['learnboxid'];
         LearnBox::deletebyId($id);
         break;
+    case('quick'):
+        $view='quick';
+
 }
 if ($view!=='login'){
     include 'view/menu.php';

@@ -23,7 +23,7 @@ class User
     }
 
 
-    public static function getUserbyName($name): User
+    public static function getUserbyName($name): mixed
     {
         $db = Db::get_Con();
         $sql = 'SELECT * FROM user WHERE name = :name';

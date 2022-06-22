@@ -82,7 +82,6 @@
         let quantity = document.getElementById('quantity');
         let label = document.getElementById('quantitylabel');
         let checkboxes = document.getElementsByClassName('checkbox');
-        let str = `&name=test`;
         const checkedboxes = [];
 
         for (const checkbox of checkboxes) {
@@ -99,7 +98,6 @@
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                console.log(xhttp.response)
                 label.innerHTML = 'max Anzahl ' + xhttp.response;
                 quantity.setAttribute('max', xhttp.response);
                 document.getElementById('start').removeAttribute('disabled');

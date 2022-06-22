@@ -3,7 +3,7 @@
     flex-direction: row;
     background-color: royalblue;
     height: 30px;
-    align-items: center;
+    align-items: baseline;
     align-content: center;
     position: sticky;
     width: 100%;
@@ -14,7 +14,7 @@
 
 }
 
-#welcomehead, #logouthead, #historyhead {
+#welcomehead, #logouthead, #historyhead, #quickhead, .menubutt {
     margin-left: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -37,5 +37,20 @@
     background-color: #85bfec;
     border-style: none;
     cursor: pointer;
+
+}
+.dropdown {
+    display: none;
+    background-color: #85bfec;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.quick{
+    display: flex;
+    flex-direction: column;
+}
+
+#quickhead:hover .dropdown {
+    display: block;
 
 }

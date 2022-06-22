@@ -101,7 +101,7 @@
         let name = document.getElementById('name').value;
         let pw = document.getElementById('password').value;
         let str = `&name=${name}&password=${pw}`;
-        console.log(str);
+
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
