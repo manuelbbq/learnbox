@@ -19,7 +19,8 @@
         <label id="passwordlabel" for="password">Passwort</label>
         <input type="password" id="password" name="password" required><br>
         <input type="text" id="userid" name="userid" value="" hidden><br>
-        <input type="text" name="action" value="welcome" hidden>
+        <input type="text" id="view" name="view" value="welcome" hidden><br>
+        <input type="text" name="action" value="Actionwelcome" hidden>
 
 
     </form>

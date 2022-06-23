@@ -1,5 +1,5 @@
 <?php
-
+$user = $this->getParams()['user'];
 
 ?>
 

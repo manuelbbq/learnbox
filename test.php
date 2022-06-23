@@ -1,31 +1,24 @@
+
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'config.php';
+echo '<pre>';
+print_r($_REQUEST);
+//echo'<br> action = '.$action.'<br>';
+echo 'session <br>';
+print_r($_SESSION);
+echo '</pre>';
+
 spl_autoload_register(function ($className) {
     include "class/" . $className . '.php';
 });
+$action= $_REQUEST['action'] ?? '';
+$view= $_REQUEST['view'] ?? 'login';
 
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-$learn = LearnBox::getLearnboxbyId(63);
-print_r($learn->getSubjects());
-////
-//echo '<pre>';
-//
-//print_r($_REQUEST);
-//$allqs = Flashcard::getFlashcardsbySubjects($_REQUEST['subjectarr']);
-//$keys = array_rand($allqs,$_REQUEST['quantity']);
-//$question = array();
-//foreach ($keys as $key){
-//    $question[] = $allqs[$key];
-//}
-//shuffle($question);
-//print_r($question);
-//echo '</pre>';
 
-
-//
-
-//echo $learn->getPerzentig();
-
-//Flashcard::create('was ist 5+3','8','Math');
+$front = FrontController::getInstance($view, $action);
+$front->run();
