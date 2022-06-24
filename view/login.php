@@ -36,7 +36,8 @@
         <label for="password">Bestätige Passwort</label>
         <input type="password" id="bepassword" name="bepassword" onkeyup="checkpw()" required><br>
         <input type="text" name="newuser" value="true" hidden>
-        <button id="newuserbut" name="action" value="welcome" disabled>Erstellen</button>
+        <input type="text" id="view" name="view" value="welcome" hidden><br>
+        <button id="newuserbut" name="action" value="Actionwelcome" disabled>Erstellen</button>
         <div id="newuser"></div>
         <div id="passok"></div>
     </form>

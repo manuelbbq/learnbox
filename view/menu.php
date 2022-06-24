@@ -4,14 +4,16 @@
 
     <div id="welcomehead">
         <form class="formmenu" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <button class="menubutt" name="action" value="welcome">Hauptmenu</button>
+            <input type="text" id="view" name="view" value="welcome" hidden><br>
+            <button class="menubutt" name="action" value="Actionwelcome">Hauptmenu</button>
         </form>
     </div>
 
     <div id="historyhead">
 
         <form class="formmenu" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <button class="menubutt" name="action" value="history">History</button>
+            <input type="text" id="view" name="view" value="history" hidden><br>
+            <button class="menubutt" name="action" value="Actionhistory">History</button>
         </form>
     </div>
 
@@ -36,7 +38,8 @@
     <div id="logouthead">
 
         <form class="formmenu" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <button class="menubutt" name="action" value="logout">Logout</button>
+            <input type="text" id="view" name="login" value="welcome" hidden><br>
+            <button class="menubutt" name="action" value="Actionlogout">Logout</button>
         </form>
     </div>
 

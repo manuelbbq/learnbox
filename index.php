@@ -2,33 +2,26 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-
 include 'config.php';
-spl_autoload_register(function ($className) {
-    include "class/" . $className . '.php';
+spl_autoload_register(function ($class){
+    $filename="class/$class.php";
+    if(!file_exists($filename))
+    {
+        return "file : $filename is not Exist on the Given Path";
+    }
+    require "class/$class.php";
+});
+spl_autoload_register(function ($class){
+    $filename="controller/$class.php";
+    if(!file_exists($filename))
+    {
+        return "file : $filename is not Exist on the Given Path";
+    }
+    require "controller/$class.php";
 });
 session_start();
 $action= $_REQUEST['action'] ?? '';
 $view= $_REQUEST['view'] ?? 'login';
-//if (isset($_REQUEST['action'])) {
-//    $action = $_REQUEST['action'];
-//} else {
-//    if (isset($_SESSION['userid'])) {
-//        $action = 'welcome';
-//    } else {
-//        $action = 'login';
-//    }
-//}
-//
-//$userinput = $_REQUEST['userinput'] ?? '';
-
-
-
-
-
-$front = FrontController::getInstance($view, $action);
-$front->run();
 
 echo '<pre>';
 print_r($_REQUEST);
@@ -36,6 +29,11 @@ echo'<br> action = '.$action.'<br>';
 echo 'session <br>';
 print_r($_SESSION);
 echo '</pre>';
+
+
+$front = FrontController::getInstance($view, $action,$_REQUEST );
+$front->run();
+
 
 
 
@@ -48,7 +46,6 @@ echo '</pre>';
 //    case ('showfirst'):
 //
 //        $user = User::getUserbyId($_SESSION['userid']);
-//
 //        $allqs = Flashcard::getFlashcardsbySubjects($_REQUEST['subjectarr']);
 //        $keys = array_rand($allqs, $_REQUEST['quantity']);
 //        $question = array();

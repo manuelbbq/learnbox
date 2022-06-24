@@ -9,24 +9,25 @@ final class FrontController
     private array $params;
 
 
-
-    public static function getInstance($view = 'login', $action = ""): FrontController
+    public static function getInstance($view, $action, $params): FrontController
     {
         if (self::$instance === null) {
-            self::$instance = new self($view, $action);
+            self::$instance = new self($view, $action, $params);
         }
 
         return self::$instance;
     }
 
-    private function __construct(string $view, string $action = null)
+    private function __construct(string $view, string $action = null, array $params)
     {
 
         $this->view = $view;
         $this->action = $action;
+        $this->params = $params;
     }
 
-    public function getParams(){
+    public function getParams()
+    {
         return $this->params;
     }
 
@@ -35,11 +36,12 @@ final class FrontController
     {
         if (!$this->action == "") {
             $actionobj = new $this->action;
-            $this->setParams($actionobj->execute());
+            $this->setParams($actionobj->execute($this->params));
         }
-//        include 'view/menu.php';
+        if ($this->view != 'login') {
+            include 'view/menu.php';
+        }
         include 'view/' . $this->view . '.php';
-
 
 
     }
@@ -50,8 +52,6 @@ final class FrontController
         return $this;
 
     }
-
-
 
 
 }

@@ -31,7 +31,7 @@ $user = $this->getParams()['user'];
                 foreach (Flashcard::getSubjects() as $subject) {
                     ?>
                     <label class="label" for="<?php echo $subject['subject'] ?>"><?php echo $subject['subject'] ?></label>
-                    <input  type="checkbox" class="checkbox" id="<?php echo $subject['subject'] ?>" name="subjectarr[]"
+                    <input type="checkbox" class="checkbox" id="<?php echo $subject['subject'] ?>" name="subjectarr[]"
                            value="<?php echo $subject['subject'] ?>" onchange="getmaxquestions()" checked>
                     <?php if ($i % 2 == 0) {
                         echo "<br>";
@@ -42,8 +42,9 @@ $user = $this->getParams()['user'];
             </div>
             <label id="quantitylabel" for="quantity">max. Anzahl :</label>
             <input type="number" id="quantity" name="quantity" min="1" max="5" required>
+            <input type="text" id="view" name="view" value="card" hidden>
             <input type="text" name="name" value="<?php echo $user->getName() ?>" hidden><br>
-            <button id="start" name="action" value="showfirst">Start</button>
+            <button id="start" name="action" value="newlearnbox">Start</button>
         </form>
         <p id="errormsg"></p>
 
@@ -60,8 +61,9 @@ $user = $this->getParams()['user'];
                 <p>Fragen: <?php echo $learnbox->countFlashcard() ?></p>
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
-                    <button name="action" value="showlearnbox">Anzeigen</button>
-                    <button name="action" value="retry">Nochmal</button>
+                    <input type="text" id="view" name="view" value="result" hidden><br>
+                    <button name="action" value="Actionshowlearnbox">Anzeigen</button>
+                    <button name="action" value="Actionretry">Nochmal</button>
                 </form>
 
             </div>
