@@ -39,7 +39,7 @@
     <div id="logouthead">
 
         <form class="formmenu" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            <input type="text" id="view" name="login" value="welcome" hidden><br>
+            <input type="text" id="view" name="view" value="login" hidden><br>
             <button class="menubutt" name="action" value="Actionlogout">Logout</button>
         </form>
     </div>

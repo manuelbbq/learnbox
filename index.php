@@ -21,20 +21,28 @@ spl_autoload_register(function ($class){
 });
 session_start();
 $action= $_REQUEST['action'] ?? '';
-$view= $_REQUEST['view'] ?? 'login';
+//$view= $_REQUEST['view'] ?? 'login';
+if (isset($_REQUEST['view'])){
+    $view = $_REQUEST['view'];
+} else if (isset($_SESSION['userid'])) {
+    $view = 'welcome';
+    $action = 'Actionwelcome';
+} else {
+    $view = 'login';
+}
 
-echo '<pre>';
-print_r($_REQUEST);
-echo'<br> action = '.$action.'<br>';
-echo 'session <br>';
-print_r($_SESSION);
-echo '</pre>';
 
 
 $front = FrontController::getInstance($view, $action,$_REQUEST );
 $front->run();
 
-
+echo '<pre>';
+print_r($_REQUEST);
+echo '$_REQUest';
+echo'<br> action = '.$action.'<br>';
+echo 'session <br>';
+print_r($_SESSION);
+echo '</pre>';
 
 
 
