@@ -1,5 +1,5 @@
 <?php
-
+$subject = $this->getParams()['quick'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,7 +36,7 @@
     }
 
     function get_new() {
-        let subject = <?php echo "'" . $_REQUEST['quick'] . "'"; ?>;
+        let subject = <?php echo "'" . $subject . "'"; ?>;
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {

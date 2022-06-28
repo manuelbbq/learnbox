@@ -3,8 +3,11 @@
 class Actionquick implements Actioninterface
 {
 
-    public function execute()
+    public function execute(array $array):array
     {
-        // TODO: Implement execute() method.
+
+        return array(
+            'quick'=> $array['quick']
+        );
     }
 }

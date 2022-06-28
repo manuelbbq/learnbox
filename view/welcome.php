@@ -30,7 +30,8 @@ $user = $this->getParams()['user'];
                 $i = 1;
                 foreach (Flashcard::getSubjects() as $subject) {
                     ?>
-                    <label class="label" for="<?php echo $subject['subject'] ?>"><?php echo $subject['subject'] ?></label>
+                    <label class="label"
+                           for="<?php echo $subject['subject'] ?>"><?php echo $subject['subject'] ?></label>
                     <input type="checkbox" class="checkbox" id="<?php echo $subject['subject'] ?>" name="subjectarr[]"
                            value="<?php echo $subject['subject'] ?>" onchange="getmaxquestions()" checked>
                     <?php if ($i % 2 == 0) {
@@ -57,12 +58,16 @@ $user = $this->getParams()['user'];
             ?>
             <div class="lernbox">
                 <p><?php echo 'Datum: ' . $learnbox->getDate() . ' Prozent: ' . $learnbox->getPerzentig() ?></p>
-                <p>Fächer: <?php echo implode(', ',$learnbox->getSubjects())?></p>
+                <p>Fächer: <?php echo implode(', ', $learnbox->getSubjects()) ?></p>
                 <p>Fragen: <?php echo $learnbox->countFlashcard() ?></p>
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                     <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
                     <input type="text" id="view" name="view" value="result" hidden><br>
                     <button name="action" value="Actionshowlearnbox">Anzeigen</button>
+                </form>
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                    <input type="text" name="learnboxid" value="<?php echo $learnbox->getLearnboxId() ?>" hidden>
+                    <input type="text" id="view" name="view" value="card" hidden><br>
                     <button name="action" value="Actionretry">Nochmal</button>
                 </form>
 

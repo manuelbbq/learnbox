@@ -21,7 +21,8 @@
         <button class="menubutt">Schnellfragerunde</button>
         <div class="dropdown">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>">
-                <input type="text" name="action" value="quick" hidden>
+                <input type="text" name="view" value="quick" hidden>
+                <input type="text" name="action" value="Actionquick" hidden>
             <?php foreach (Flashcard::getSubjects() as $subject) {
                 ?>
             <button class="dropbut" name="quick" value="<?php echo $subject['subject']?>"><?php echo $subject['subject']?></button>
